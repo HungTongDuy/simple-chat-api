@@ -27,10 +27,10 @@ app.use(logger('dev'));
 
 
 const isProduction = process.env.NODE_ENV === 'production';
-let URL_DB = 'mongodb://localhost:27017/simple_chat';
-if(isProduction) {
+//let URL_DB = 'mongodb://localhost:27017/simple_chat';
+//if(isProduction) {
     URL_DB = config.database_mlab;
-}
+//}
 mongoose.connect(URL_DB, {
     //useMongoClient: true,
     useNewUrlParser: true
