@@ -5,7 +5,7 @@ module.exports = {
     database: 'mongodb://localhost:27017',
 	database_mlab: 'mongodb://admin:admin123@ds038547.mlab.com:38547/simple-chat',
     // Setting port for server
-    port: 6000,
+    port: 5000,
     // Configuring Mailgun API for sending transactional email
     mailgun_priv_key: 'mailgun private key here',
     // Configuring Mailgun domain for sending transactional email

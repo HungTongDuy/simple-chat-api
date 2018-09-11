@@ -29,3 +29,19 @@ exports.viewProfile = (req, res, next) => {
         });
     });
 };
+
+exports.viewUserList = (req, res, next) => {
+    console.log('viewUserList');
+    User.find({})
+    .exec((err, users) => {
+        if (err) {
+            res.send({
+                error: err
+            });
+            return next(err);
+        }
+        return res.status(200).json({
+            users: users
+        })
+    })
+}

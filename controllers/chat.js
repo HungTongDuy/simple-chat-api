@@ -21,7 +21,6 @@ exports.getConversations = (req, res, next) => {
                 });
                 return next(err);
             }
-
             // Set up empty array to hold conversations + most recent message
             const fullConversations = [];
             conversations.forEach((conversation) => {
@@ -114,11 +113,49 @@ exports.newConversation = (req, res, next) => {
         return next();
     }
 
-    let recipient = req.body.recipient;
-    recipient.push(req.user._id);
+    let participants = req.body.recipient;
+    // let result1 = null;
+    // let result2 = null;
+    // console.log(req.user._id);
+    // console.log(participants);
+    // Conversation.find({
+    //     participants: req.user._id
+    // })
+    // .populate('participants')
+    // .exec((err, conversations) => {
+    //     result1 = conversations;
+    //     result2 = conversations.filter(conversation => {
+    //         if(conversation.participants.length == (participants.length + 1)) {
+    //             return true
+    //         }
+    //         return false;
+    //     })
+    //     let item = null;
+
+    //     result2.forEach((item, key) => {
+    //         item.participants.find((el) => {
+    //             if(el._id != req.user._id) {
+    //                 console.log('el._id', el._id);
+    //                 console.log('req.body.recipient', participants);
+    //                 console.log('indexOf: ', participants.indexOf(el._id))
+    //                 if(req.body.recipient.indexOf(el._id) > -1) {
+    //                     return item = item;
+    //                 }
+    //             }
+    //         })
+    //     })
+
+    //     res.json({
+    //         //result1: result1,
+    //         result2: result2,
+    //         item: item
+    //     })
+    // })
+
+    participants.push(req.user._id);
 
     const conversation = new Conversation({
-        participants: recipient
+        participants: participants
     });
 
     conversation.save((err, newConversation) => {
@@ -156,7 +193,8 @@ exports.sendReply = (req, res, next) => {
     const reply = new Message({
         conversationId: req.params.conversationId,
         body: req.body.composedMessage,
-        author: req.user._id
+        author: req.user._id,
+        viewer: req.user._id
     });
 
     reply.save((err, sentReply) => {

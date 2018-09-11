@@ -96,7 +96,7 @@ module.exports = function (app) {
     apiRoutes.use('/user', userRoutes);
 
     // View user list 
-
+    userRoutes.get('/', requireToken, UserController.viewUserList)
     // View user profile route
     userRoutes.get('/:userId', requireToken, UserController.viewProfile);
 
