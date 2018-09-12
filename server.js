@@ -45,8 +45,9 @@ db.on("error", console.error.bind(console, "MongoDB connection error:"));
 
 let server;
 if (process.env.NODE_ENV != config.test_env) {
-    server = app.listen(config.port, () => {
-        console.log('App running on port ', config.port);
+    const port = process.env.PORT || config.port;
+    server = app.listen(port, () => {
+        console.log('App running on port ', port);
     })
 } else {
     server = app.listen(config.test_port);
